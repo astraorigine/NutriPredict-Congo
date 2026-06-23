@@ -1,0 +1,27 @@
+# Données DHS — ne jamais pousser sur GitHub (condition d'accès signée)
+*.dta
+*.DTA
+*.sav
+*.SAV
+*.dat
+*.DAT
+*.zip
+*.ZIP
+
+# Dossiers de données brutes
+data/raw/
+
+# Fichiers Python temporaires
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Environnements virtuels
+.env
+venv/
+env/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
