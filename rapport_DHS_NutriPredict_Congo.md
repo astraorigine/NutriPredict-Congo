@@ -72,8 +72,60 @@ de `class_weight='balanced'` dans les modèles scikit-learn.
 
 ---
 
+## 2. Résultats de l'analyse exploratoire
+
+### 2.1 Facteurs socio-démographiques associés au stunting
+
+L'analyse exploratoire a examiné sept facteurs socio-démographiques 
+disponibles dans les données DHS Congo 2011-12, en comparant le 
+taux de stunting entre groupes.
+
+| Facteur | Groupe le plus exposé | Taux | Groupe le moins exposé | Taux | Écart |
+|---|---|---|---|---|---|
+| Richesse du ménage | Q1-Très pauvre | 33.5% | Q5-Très riche | 9.6% | 23.9 pts |
+| Âge de l'enfant | 2 ans | 36.0% | 0 an | 13.1% | 22.9 pts |
+| Accès à l'électricité | Sans électricité | 30.1% | Avec électricité | 14.2% | 15.9 pts |
+| Milieu de résidence | Rural | 29.7% | Urbain | 18.2% | 11.5 pts |
+| Source d'eau potable | Non améliorée | 31.0% | Améliorée | 23.1% | 7.9 pts |
+| Sexe de l'enfant | Masculin | 29.0% | Féminin | 24.4% | 4.6 pts |
+| Rang de naissance | 4e enfant et + | 28.0% | 1er enfant | 25.3% | 2.7 pts |
+
+### 2.2 Observations clés
+
+**Le niveau de richesse du ménage est le facteur le plus 
+discriminant observé.** L'écart de 23.9 points entre le quintile 
+le plus pauvre et le plus riche dépasse celui de tous les autres 
+facteurs pris individuellement.
+
+**L'âge suit un schéma en cloche caractéristique de la "fenêtre 
+des 1000 jours".** Le taux de stunting passe de 13.1% à la 
+naissance à un pic de 36.0% vers 2 ans, avant de redescendre 
+légèrement, cohérent avec la littérature scientifique sur la 
+période critique de développement nutritionnel.
+
+**Les facteurs d'accès aux services essentiels (électricité, eau) 
+montrent un gradient cohérent avec l'hypothèse de départ** : 
+l'accès limité aux infrastructures de base est associé à un 
+risque accru de malnutrition chronique.
+
+**Le sexe et le rang de naissance ont un effet réel mais modeste** 
+comparé aux facteurs socio-économiques et à l'âge.
+
+### 2.3 Limite méthodologique
+
+Cette analyse est univariée : chaque facteur est examiné 
+indépendamment des autres. Or, richesse, électricité, accès 
+à l'eau et milieu de résidence sont vraisemblablement corrélés 
+entre eux (un ménage rural pauvre cumule souvent plusieurs 
+désavantages simultanément). Cette analyse ne permet donc pas 
+d'isoler l'effet propre de chaque variable une fois les autres 
+prises en compte.
+
+La modélisation multivariée (section 3) permettra d'estimer 
+l'importance relative de chaque facteur en tenant compte des 
+autres simultanément.
+
 *Les sections suivantes seront complétées au fur et à mesure 
 de l'avancement du projet :*
-- *Section 2 : Résultats de l'analyse exploratoire*
 - *Section 3 : Résultats de la modélisation*
 - *Section 4 : Conclusions et limites*
