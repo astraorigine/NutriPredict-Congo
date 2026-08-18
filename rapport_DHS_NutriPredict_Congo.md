@@ -125,7 +125,142 @@ La modélisation multivariée (section 3) permettra d'estimer
 l'importance relative de chaque facteur en tenant compte des 
 autres simultanément.
 
+## 3. Résultats de la modélisation
+
+### 3.1 Approche méthodologique
+
+Deux modèles de classification supervisée ont été construits 
+et comparés afin de prédire le risque de retard de croissance 
+(stunting) à partir de neuf variables socio-démographiques : 
+milieu de résidence, indice de richesse du ménage, source 
+d'eau potable, type d'assainissement, accès à l'électricité, 
+sexe du chef de ménage, sexe de l'enfant, âge de l'enfant et 
+rang de naissance.
+
+Les données ont été séparées en un ensemble d'entraînement 
+(80%, 3 580 observations) et un ensemble de test (20%, 895 
+observations), avec stratification selon la variable cible 
+afin de préserver la même proportion de cas positifs dans 
+les deux ensembles (26.7%).
+
+Le prétraitement des données (imputation des valeurs manquantes, 
+encodage des variables catégorielles, mise à l'échelle) a été 
+intégré dans un pipeline scikit-learn appris exclusivement sur 
+l'ensemble d'entraînement, conformément aux bonnes pratiques 
+de prévention de la fuite de données entre les phases 
+d'apprentissage et d'évaluation.
+
+Étant donné le déséquilibre modéré de la variable cible (26.7% 
+de cas positifs), les modèles ont été entraînés avec une 
+pondération équilibrée des classes (`class_weight='balanced'`), 
+et l'évaluation a privilégié des métriques adaptées à ce contexte 
+(F1-score, rappel, aire sous la courbe ROC) plutôt que l'exactitude 
+globale, connue pour être trompeuse sur des données déséquilibrées.
+
+### 3.2 Modèles évalués
+
+**Modèle de référence — Régression logistique**
+
+| Métrique | Valeur |
+|---|---|
+| Precision | 0.328 |
+| Recall | 0.649 |
+| F1-score | 0.436 |
+| ROC-AUC | 0.623 |
+
+**Modèle de comparaison — Random Forest** 
+(200 arbres, profondeur maximale de 8 niveaux)
+
+| Métrique | Valeur |
+|---|---|
+| Precision | 0.371 |
+| Recall | 0.678 |
+| F1-score | 0.479 |
+| ROC-AUC | 0.655 |
+
+Le modèle Random Forest surpasse la régression logistique sur 
+l'ensemble des quatre métriques d'évaluation, avec une amélioration 
+modérée mais constante. Ce résultat est cohérent avec les 
+observations de l'analyse exploratoire, qui avait mis en évidence 
+une relation non linéaire entre l'âge de l'enfant et le risque 
+de stunting — une relation que le Random Forest est structurellement 
+mieux à même de capturer qu'un modèle linéaire.
+
+Le Random Forest a été retenu comme modèle final, tant pour ses 
+performances supérieures que pour l'interprétabilité qu'offre 
+l'analyse de l'importance des variables.
+
+### 3.3 Importance des variables (analyse multivariée)
+
+L'analyse de l'importance des variables du modèle Random Forest 
+permet d'estimer la contribution de chaque facteur à la prédiction, 
+une fois l'ensemble des autres facteurs pris en compte 
+simultanément — une lecture complémentaire à l'analyse univariée 
+présentée en section 2.
+
+| Rang | Variable | Importance |
+|---|---|---|
+| 1 | Âge de l'enfant | 23.4% |
+| 2 | Richesse du ménage | 13.9% |
+| 3 | Source d'eau potable | 13.8% |
+| 4 | Rang de naissance | 13.4% |
+| 5 | Accès à l'électricité | 11.5% |
+| 6 | Assainissement | 9.8% |
+| 7 | Sexe de l'enfant | 5.7% |
+| 8 | Milieu de résidence | 5.0% |
+| 9 | Sexe du chef de ménage | 3.7% |
+
+**L'âge de l'enfant demeure le facteur le plus déterminant** 
+dans l'analyse multivariée, confirmant l'observation faite en 
+section 2 concernant la fenêtre critique des 1 000 premiers 
+jours de vie.
+
+**Le rang de naissance présente un résultat notable** : alors 
+que l'analyse univariée (section 2) ne montrait qu'un écart 
+modeste de 2.7 points de pourcentage entre le premier enfant 
+et les enfants de rang 4 et plus, son importance relative dans 
+le modèle multivarié (13.4%) est nettement supérieure à ce que 
+suggérait l'analyse descriptive seule. Ce résultat illustre 
+l'intérêt d'une approche multivariée pour révéler des effets 
+masqués par des interactions entre variables.
+
+**Le milieu de résidence, en revanche, voit son importance 
+relative diminuer fortement** dans l'analyse multivariée (5.0%, 
+avant-dernier rang) par rapport à son poids apparent dans 
+l'analyse univariée (écart de 11.5 points, quatrième rang). 
+Cette diminution suggère que l'effet du milieu de résidence 
+observé en analyse univariée est en grande partie capté par 
+d'autres variables corrélées, notamment la richesse du ménage 
+et l'accès aux infrastructures de base.
+
+### 3.4 Limites du modèle
+
+Les performances du modèle final restent modestes (F1-score de 
+0.479, ROC-AUC de 0.655), ce qui indique que les neuf variables 
+socio-démographiques disponibles n'expliquent qu'une partie 
+limitée du phénomène observé. Cette limite est cohérente avec 
+la littérature sur les déterminants de la malnutrition infantile, 
+qui identifie généralement des facteurs additionnels non mesurés 
+dans le présent modèle, tels que les pratiques alimentaires du 
+nourrisson, l'état de santé maternelle, l'historique des maladies 
+infectieuses de l'enfant, ou la diversité du régime alimentaire 
+du ménage.
+
+La stratégie de pondération équilibrée des classes, choisie pour 
+privilégier la détection des cas à risque (rappel) dans une 
+perspective de santé publique, entraîne un nombre significatif 
+de faux positifs (precision de 0.371). Ce compromis est jugé 
+acceptable dans un contexte de ciblage préventif, où le coût 
+de ne pas détecter un enfant réellement à risque est considéré 
+comme supérieur au coût d'un dépistage complémentaire inutile.
+
+Enfin, le modèle a été entraîné et évalué exclusivement sur les 
+données du Congo (Brazzaville) issues de l'enquête DHS 2011-12. 
+Sa capacité de généralisation à d'autres contextes nationaux ou 
+à des périodes plus récentes n'a pas été testée à ce stade du 
+projet.
+
+
 *Les sections suivantes seront complétées au fur et à mesure 
 de l'avancement du projet :*
-- *Section 3 : Résultats de la modélisation*
 - *Section 4 : Conclusions et limites*
