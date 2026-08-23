@@ -2,7 +2,7 @@
 **Projet :** Déterminants socio-démographiques de la malnutrition 
 infantile en République du Congo  
 **Auteur :** MPOY Schekina Lutte-de-vie  
-**Institution :** Université Denis Sassou N'Guesso (UDSN), Kintélé  
+**Institution :** Université Denis Sassou Nguesso (UDSN), Kintélé  
 **Email :** mpoyschekinaluttedevie@gmail.com  
 **Date de début :** 19 juin 2026  
 **Statut :** En cours — document mis à jour progressivement  
