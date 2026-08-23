@@ -5,7 +5,7 @@ infantile en République du Congo
 **Institution :** Université Denis Sassou Nguesso (UDSN), Kintélé  
 **Email :** mpoyschekinaluttedevie@gmail.com  
 **Date de début :** 19 juin 2026  
-**Statut :** En cours — document mis à jour progressivement  
+**Statut :** Finalisé — soumis au DHS Program
 
 ---
 
