@@ -25,8 +25,9 @@ d'une demande académique approuvée le 22 juin 2026.
 | Congo (Brazzaville) | Standard DHS 2011-12 | CGKR61FL.DTA (Children's Recode) | 9 329 | 1 110 |
 | Congo (Brazzaville) | Standard DHS 2011-12 | CGHR61FL.DTA (Household Recode) | 11 632 | 3 194 |
 
-*Les fichiers RDC 2023-24 et Cameroun 2018 seront intégrés 
-dans la phase de comparaison régionale.*
+*Les fichiers RDC 2023-24 et Cameroun 2018 ont également été 
+obtenus mais n'ont pas été exploités dans cette première itération 
+du projet (voir section 4.2, perspectives d'extension).*
 
 ### 1.3 Préparation des données
 
