@@ -90,6 +90,20 @@ taux de stunting entre groupes.
 | Sexe de l'enfant | Masculin | 29.0% | Féminin | 24.4% | 4.6 pts |
 | Rang de naissance | 4e enfant et + | 28.0% | 1er enfant | 25.3% | 2.7 pts |
 
+
+![Distribution globale du stunting](outputs/01_distribution_stunting.png)
+
+![Distribution du stunting par milieu de résidence](outputs/02_stunting_milieu.png)
+
+![Distribution du stunting par quintile de richesse](outputs/03_stunting_richesse.png)
+
+![Stunting selon l'accès à l'électricité et à l'eau potable](outputs/04_stunting_services.png)
+
+![Stunting selon l'âge et le sexe de l'enfant](outputs/05_stunting_sexe_age.png)
+
+![Stunting par rang de naissance](outputs/06_stunting_rang.png)
+
+
 ### 2.2 Observations clés
 
 **Le niveau de richesse du ménage est le facteur le plus 
@@ -178,6 +192,12 @@ globale, connue pour être trompeuse sur des données déséquilibrées.
 | F1-score | 0.479 |
 | ROC-AUC | 0.655 |
 
+
+![Comparaison des modèles — métriques et courbes ROC](outputs/08_comparaison_modeles.png)
+
+![Matrice de confusion — Random Forest](outputs/07_matrice_confusion_logreg.png)
+
+
 Le modèle Random Forest surpasse la régression logistique sur 
 l'ensemble des quatre métriques d'évaluation, avec une amélioration 
 modérée mais constante. Ce résultat est cohérent avec les 
@@ -209,6 +229,8 @@ présentée en section 2.
 | 7 | Sexe de l'enfant | 5.7% |
 | 8 | Milieu de résidence | 5.0% |
 | 9 | Sexe du chef de ménage | 3.7% |
+
+![Importance des variables — analyse multivariée](outputs/09_feature_importance.png)
 
 **L'âge de l'enfant demeure le facteur le plus déterminant** 
 dans l'analyse multivariée, confirmant l'observation faite en 
@@ -261,6 +283,97 @@ Sa capacité de généralisation à d'autres contextes nationaux ou
 projet.
 
 
-*Les sections suivantes seront complétées au fur et à mesure 
-de l'avancement du projet :*
-- *Section 4 : Conclusions et limites*
+## 4. Conclusions et limites générales
+
+### 4.1 Synthèse des résultats
+
+Cette étude a analysé les facteurs socio-démographiques associés 
+au retard de croissance (stunting) chez 4 475 enfants de moins 
+de cinq ans au Congo (Brazzaville), à partir des microdonnées 
+de l'Enquête Démographique et de Santé 2011-12.
+
+Le taux global de stunting observé dans l'échantillon est de 
+26.7%, cohérent avec les niveaux rapportés dans la littérature 
+sur la malnutrition chronique en Afrique centrale pour la période 
+considérée.
+
+L'analyse exploratoire univariée a mis en évidence des écarts 
+significatifs selon plusieurs facteurs, le plus marqué étant le 
+niveau de richesse du ménage (écart de 23.9 points de pourcentage 
+entre le quintile le plus pauvre et le plus riche), suivi par 
+l'âge de l'enfant, qui présente une évolution en cloche 
+caractéristique de la fenêtre critique des 1 000 premiers jours 
+de vie (pic de 36.0% vers l'âge de deux ans).
+
+La modélisation par apprentissage supervisé, comparant une 
+régression logistique et un modèle Random Forest, confirme 
+l'importance prépondérante de l'âge de l'enfant dans une 
+perspective multivariée (23.4% de l'importance du modèle retenu), 
+et révèle un résultat notable : le rang de naissance, dont 
+l'effet apparaissait modeste en analyse univariée, se révèle 
+nettement plus déterminant une fois les interactions entre 
+variables prises en compte (13.4% d'importance, quatrième facteur 
+le plus déterminant).
+
+### 4.2 Portée et limites de l'étude
+
+Les résultats de cette étude doivent être interprétés à la lumière 
+de plusieurs limites méthodologiques.
+
+**Nature transversale des données.** L'enquête DHS 2011-12 constitue 
+une photographie à un instant donné. Les relations observées entre 
+facteurs socio-démographiques et stunting sont de nature associative 
+et ne permettent pas d'établir de lien de causalité directe.
+
+**Variables disponibles limitées.** Le modèle repose sur neuf 
+variables socio-démographiques et ne permet d'expliquer qu'une 
+partie du phénomène observé, ce qui se traduit par des performances 
+prédictives modestes (F1-score de 0.479, aire sous la courbe ROC 
+de 0.655). Des facteurs additionnels reconnus dans la littérature 
+sur la malnutrition infantile — pratiques d'allaitement, diversité 
+alimentaire du nourrisson, état de santé maternelle, historique 
+des épisodes infectieux — n'ont pas été intégrés dans cette phase 
+de l'analyse.
+
+**Ancienneté relative des données.** L'enquête utilisée date de 
+2011-12. La situation nutritionnelle actuelle au Congo peut différer 
+de celle observée à cette période, notamment en raison de 
+l'évolution des conditions socio-économiques et des politiques 
+publiques mises en œuvre depuis lors.
+
+**Portée géographique.** L'analyse est circonscrite au Congo 
+(Brazzaville). Aucune généralisation à d'autres contextes nationaux 
+n'a été testée dans cette phase du projet, bien que l'accès aux 
+données de la République Démocratique du Congo et du Cameroun ait 
+été obtenu en vue d'une possible extension comparative ultérieure.
+
+### 4.3 Apport et perspectives
+
+Cette étude illustre l'intérêt d'une approche combinant analyse 
+exploratoire et modélisation prédictive pour documenter les 
+disparités nutritionnelles infantiles à partir de données 
+individuelles, plutôt que d'indicateurs macroéconomiques agrégés. 
+La méthodologie développée — nettoyage structuré des microdonnées 
+DHS, gestion rigoureuse du déséquilibre de classes, analyse 
+multivariée de l'importance des variables — est reproductible et 
+transposable à d'autres enquêtes DHS ou à d'autres indicateurs 
+de malnutrition infantile (insuffisance pondérale, émaciation).
+
+Les résultats, notamment l'importance relative de l'âge de l'enfant 
+et du rang de naissance, pourraient utilement informer la 
+conception de programmes de ciblage nutritionnel priorisant les 
+enfants dans leur seconde année de vie et les familles nombreuses, 
+en complément des critères de ciblage géographique et économique 
+classiquement utilisés.
+
+---
+
+**Citation des données :**  
+The DHS Program, Congo Standard DHS 2011-12. ICF International, 
+Rockville, Maryland, USA.
+
+**Auteur du rapport :** MPOY Schekina Lutte-
+De-Vie  
+**Institution :** Université Denis Sassou Nguesso (UDSN), Kintélé, 
+République du Congo  
+**Contact :** mpoyschekinaluttedevie@gmail.com
