@@ -1,7 +1,7 @@
 # Rapport d'utilisation des données DHS
 **Projet :** Déterminants socio-démographiques de la malnutrition 
 infantile en République du Congo  
-**Auteur :** MPOY Schekina Lutte-de-vie  
+**Auteur :** MPOY Schekina Lutte-De-Vie  
 **Institution :** Université Denis Sassou Nguesso (UDSN), Kintélé  
 **Email :** mpoyschekinaluttedevie@gmail.com  
 **Date de début :** 19 juin 2026  
@@ -373,8 +373,7 @@ classiquement utilisés.
 The DHS Program, Congo Standard DHS 2011-12. ICF International, 
 Rockville, Maryland, USA.
 
-**Auteur du rapport :** MPOY Schekina Lutte-
-De-Vie  
+**Auteur du rapport :** MPOY Schekina Lutte-De-Vie  
 **Institution :** Université Denis Sassou Nguesso (UDSN), Kintélé, 
 République du Congo  
 **Contact :** mpoyschekinaluttedevie@gmail.com
